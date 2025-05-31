@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 1rem;
+      color: #333;
+    }
+    h2 {
+      margin-bottom: 1rem;
+      color: #007bff;
+    }
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      background: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      word-break: break-word;
+      max-width: 400px;
+      text-align: center;
+    }
+    #uuid-display {
+      font-weight: 600;
+      color: #555;
+    }
+    #logout-btn, #chat-btn {
+      padding: 0.75rem 2rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      margin: 0.5rem;
+    }
+    #logout-btn {
+      background-color: #dc3545;
+    }
+    #logout-btn:hover {
+      background-color: #b02a37;
+    }
+    #chat-btn:hover {
+      background-color: #0056b3;
+    }
+    @media (max-width: 480px) {
+      p {
+        max-width: 90vw;
+        padding: 1rem;
+      }
+      #logout-btn, #chat-btn {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2>Dashboard</h2>
+  <p>Your UUID: <span id="uuid-display">Loading...</span></p>
+  <button id="chat-btn">Go to Chat</button>
+  <button id="logout-btn">Logout</button>
+  <script>
+    // Show stored UUID
+    const uuid = localStorage.getItem("user_uuid");
+    if (uuid) {
+      document.getElementById("uuid-display").innerText = uuid;
+    } else {
+      document.getElementById("uuid-display").innerText = "No UUID found. Please login first.";
+    }
+    document.getElementById("chat-btn").addEventListener("click", () => {
+      window.location.href = "/chat.html";
+    });
+    document.getElementById("logout-btn").addEventListener("click", () => {
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("user_uuid");
+      window.location.href = "/";
+    });
+  </script>
+</body>
+</html>
